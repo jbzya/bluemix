@@ -1,0 +1,158 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu
+  labels:
+    app: ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+      - name: ubuntu
+        image: rastasheep/ubuntu-sshd
+        resources:
+            requests:
+                cpu: 1
+                memory: 1536Mi
+        securityContext:
+            privileged: true
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ubuntu
+  labels:
+    app: ubuntu
+spec:
+  selector:
+    app: ubuntu  
+  ports:
+      - name: tcp-20-30020
+        protocol: TCP
+        port: 20
+        targetPort: 20
+        nodePort: 30020
+      - name: tcp-21-30021
+        protocol: TCP
+        port: 21
+        targetPort: 21
+        nodePort: 30021
+      - name: tcp-22-30022
+        protocol: TCP
+        port: 22
+        targetPort: 22
+        nodePort: 30022
+      - name: tcp-80-30080
+        protocol: TCP
+        port: 80
+        targetPort: 80
+        nodePort: 30080
+      - name: tcp-88-30088
+        protocol: TCP
+        port: 88
+        targetPort: 88
+        nodePort: 30088
+      - name: tcp-443-30443
+        protocol: TCP
+        port: 443
+        targetPort: 443
+        nodePort: 30443
+      - name: tcp-888-30888
+        protocol: TCP
+        port: 888
+        targetPort: 888
+        nodePort: 30888
+      - name: tcp-1080-31080
+        protocol: TCP
+        port: 1080
+        targetPort: 1080
+        nodePort: 31080
+      - name: tcp-8080-30880
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+        nodePort: 30880
+      - name: tcp-8096-30096
+        protocol: TCP
+        port: 8096
+        targetPort: 8096
+        nodePort: 30096
+      - name: tcp-8112-30112
+        protocol: TCP
+        port: 8112
+        targetPort: 8112
+        nodePort: 30112
+      - name: tcp-8888-31888
+        protocol: TCP
+        port: 8888
+        targetPort: 8888
+        nodePort: 31888
+      - name: tcp-30011-30011
+        protocol: TCP
+        port: 30011
+        targetPort: 30011
+        nodePort: 30011
+      - name: tcp-30012-30012
+        protocol: TCP
+        port: 30012
+        targetPort: 30012
+        nodePort: 30012
+      - name: tcp-30013-30013
+        protocol: TCP
+        port: 30013
+        targetPort: 30013
+        nodePort: 30013
+      - name: tcp-30014-30014
+        protocol: TCP
+        port: 30014
+        targetPort: 30014
+        nodePort: 30014
+      - name: tcp-30015-30015
+        protocol: TCP
+        port: 30015
+        targetPort: 30015
+        nodePort: 30015
+      - name: tcp-30016-30016
+        protocol: TCP
+        port: 30016
+        targetPort: 30016
+        nodePort: 30016
+      - name: tcp-30017-30017
+        protocol: TCP
+        port: 30017
+        targetPort: 30017
+        nodePort: 30017
+      - name: tcp-30018-30018
+        protocol: TCP
+        port: 30018
+        targetPort: 30018
+        nodePort: 30018
+      - name: tcp-30019-30019
+        protocol: TCP
+        port: 30019
+        targetPort: 30019
+        nodePort: 30019
+      - name: tcp-30068-30068
+        protocol: TCP
+        port: 30068
+        targetPort: 30068
+        nodePort: 30068
+      - name: tcp-51413-31413
+        protocol: TCP
+        port: 51413
+        targetPort: 51413
+        nodePort: 31413
+  clusterIP: 172.21.0.11
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
